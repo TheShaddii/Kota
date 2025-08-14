@@ -1,0 +1,45 @@
+﻿<Window x:Class="Kota.App.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Kota - Login" Height="500" Width="400"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
+
+    <StackPanel Background="#F5F5F5" Margin="40">
+
+        <!-- Header -->
+        <Border Background="#2E7D32" Padding="20" Margin="0,0,0,30">
+            <StackPanel>
+                <TextBlock Text="KOTA" FontSize="24" FontWeight="Bold" 
+                          Foreground="White" HorizontalAlignment="Center"/>
+                <TextBlock Text="Local Inventory Management" FontSize="12" 
+                          Foreground="White" HorizontalAlignment="Center"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Username -->
+        <TextBlock Text="Username:" FontSize="16" FontWeight="Bold" 
+                  Foreground="Black" Margin="0,0,0,10"/>
+        <TextBox x:Name="UsernameTextBox" FontSize="14" Height="35" 
+                Padding="10" Margin="0,0,0,20"/>
+
+        <!-- Password -->
+        <TextBlock Text="Password:" FontSize="16" FontWeight="Bold" 
+                  Foreground="Black" Margin="0,0,0,10"/>
+        <PasswordBox x:Name="PasswordBox" FontSize="14" Height="35" 
+                    Padding="10" Margin="0,0,0,30"/>
+
+        <!-- Login Button -->
+        <Button x:Name="LoginButton" Content="LOGIN" Height="40" 
+                FontSize="16" FontWeight="Bold"
+                Background="#2E7D32" Foreground="White" 
+                Click="LoginButton_Click" Margin="0,0,0,20"/>
+
+        <!-- Status Messages -->
+        <TextBlock x:Name="LoadingTextBlock" Text="Logging in..." 
+                  Foreground="Blue" Visibility="Collapsed" Margin="0,10"/>
+        <TextBlock x:Name="ErrorTextBlock" Foreground="Red" 
+                  TextWrapping="Wrap" Visibility="Collapsed" Margin="0,10"/>
+
+    </StackPanel>
+</Window>

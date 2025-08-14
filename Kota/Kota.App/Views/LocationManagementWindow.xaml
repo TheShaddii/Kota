@@ -1,0 +1,159 @@
+﻿<Window x:Class="Kota.App.LocationManagementWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Location Management" Height="600" Width="900"
+        WindowStartupLocation="CenterOwner">
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <TextBlock Grid.Row="0" Text="Location Management" FontSize="20" FontWeight="Bold" 
+                  Margin="0,0,0,20" HorizontalAlignment="Center"/>
+
+        <!-- Main Content -->
+        <TabControl Grid.Row="1">
+
+            <!-- Sites Tab -->
+            <TabItem Header="Sites">
+                <Grid Margin="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Sites List -->
+                    <GroupBox Grid.Column="0" Header="Sites" Margin="0,0,10,0">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <DataGrid x:Name="SitesGrid" Grid.Row="0" AutoGenerateColumns="False" 
+                                     CanUserAddRows="False" SelectionMode="Single">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Code" Binding="{Binding Code}" Width="100"/>
+                                    <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+
+                            <Button Grid.Row="1" Content="Add Site" Margin="0,10,0,0" 
+                                   Click="AddSite_Click" Background="#2E7D32" Foreground="White"/>
+                        </Grid>
+                    </GroupBox>
+
+                    <!-- Site Details -->
+                    <GroupBox Grid.Column="1" Header="Site Details">
+                        <StackPanel Margin="10">
+                            <TextBlock Text="Code:" FontWeight="SemiBold"/>
+                            <TextBox x:Name="SiteCodeTextBox" Margin="0,5,0,15"/>
+
+                            <TextBlock Text="Name:" FontWeight="SemiBold"/>
+                            <TextBox x:Name="SiteNameTextBox" Margin="0,5,0,20"/>
+
+                            <Button Content="Save Site" Click="SaveSite_Click" 
+                                   Background="#2E7D32" Foreground="White" Margin="0,0,0,10"/>
+                            <Button Content="Clear" Click="ClearSite_Click"/>
+                        </StackPanel>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+
+            <!-- Buildings Tab -->
+            <TabItem Header="Buildings">
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Site Selection -->
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,10">
+                        <TextBlock Text="Site:" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                        <ComboBox x:Name="BuildingSiteComboBox" Width="200" 
+                                 DisplayMemberPath="Name" SelectedValuePath="Id"/>
+                    </StackPanel>
+
+                    <!-- Buildings for Selected Site -->
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <GroupBox Grid.Column="0" Header="Buildings" Margin="0,0,10,0">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <DataGrid x:Name="BuildingsGrid" Grid.Row="0" AutoGenerateColumns="False">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Code" Binding="{Binding Code}" Width="100"/>
+                                        <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+
+                                <Button Grid.Row="1" Content="Add Building" Margin="0,10,0,0" 
+                                       Click="AddBuilding_Click" Background="#2E7D32" Foreground="White"/>
+                            </Grid>
+                        </GroupBox>
+
+                        <GroupBox Grid.Column="1" Header="Building Details">
+                            <StackPanel Margin="10">
+                                <TextBlock Text="Code:" FontWeight="SemiBold"/>
+                                <TextBox x:Name="BuildingCodeTextBox" Margin="0,5,0,15"/>
+
+                                <TextBlock Text="Name:" FontWeight="SemiBold"/>
+                                <TextBox x:Name="BuildingNameTextBox" Margin="0,5,0,20"/>
+
+                                <Button Content="Save Building" Click="SaveBuilding_Click" 
+                                       Background="#2E7D32" Foreground="White" Margin="0,0,0,10"/>
+                                <Button Content="Clear" Click="ClearBuilding_Click"/>
+                            </StackPanel>
+                        </GroupBox>
+                    </Grid>
+                </Grid>
+            </TabItem>
+
+            <!-- Quick Setup Tab -->
+            <TabItem Header="Quick Setup">
+                <StackPanel Margin="20">
+                    <TextBlock Text="Quick Location Setup" FontSize="16" FontWeight="Bold" Margin="0,0,0,20"/>
+                    <TextBlock Text="This will create a basic location structure to get you started:" 
+                              Margin="0,0,0,10" TextWrapping="Wrap"/>
+
+                    <Button Content="Create Sample Location Structure" 
+                           Click="CreateSampleStructure_Click"
+                           Background="#1976D2" Foreground="White" 
+                           Height="40" Width="300" Margin="0,20"/>
+
+                    <TextBlock Margin="0,20,0,0" TextWrapping="Wrap">
+                        <Run Text="This will create:"/>
+                        <LineBreak/>
+                        <Run Text="• Main Warehouse (Site)"/>
+                        <LineBreak/>
+                        <Run Text="• Building A (Building)"/>
+                        <LineBreak/>
+                        <Run Text="• Storage Room 1 (Room)"/>
+                        <LineBreak/>
+                        <Run Text="• Cabinet A1 (Storage Unit)"/>
+                        <LineBreak/>
+                        <Run Text="• Shelf 1, Shelf 2, Shelf 3 (Bins)"/>
+                    </TextBlock>
+                </StackPanel>
+            </TabItem>
+        </TabControl>
+
+        <!-- Footer -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0">
+            <Button Content="Close" Click="Close_Click" Width="80" Height="30"/>
+        </StackPanel>
+    </Grid>
+</Window>
